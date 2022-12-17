@@ -1,29 +1,22 @@
 <?php
+
 namespace App\Models;
 
-
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class Admin extends Authenticatable implements JWTSubject
+class Wyh_Analysis extends Authenticatable implements JWTSubject
 {
-    use Notifiable ;
-
-    protected $table = 'admin';
-    protected $remeberTokenName = NULL;
+    protected $table = 'analyst';
     protected $guarded = [];
-    protected $fillable = [];
     protected $hidden = [
         'password',
     ];
-
-
-
     public function getJWTCustomClaims()
     {
         // TODO: Implement getJWTCustomClaims() method.
-        return ['role' => 'admin'];
+        return ['role' => 'analyst'];
     }
 
 
@@ -32,6 +25,7 @@ class Admin extends Authenticatable implements JWTSubject
         // TODO: Implement getJWTIdentifier() method.
         return $this->getKey();
     }
+    //
     /**
      * 创建用户
      *
@@ -43,11 +37,10 @@ class Admin extends Authenticatable implements JWTSubject
     {
 
         try {
-            $admin= self::create(['admin'=>$request['admin'],
+            $analyst= self::create(['analyst'=>$request['analyst'],
                 'password'=>$request['password']]);
-
-            return $admin ?
-                $admin :
+            return $analyst ?
+                $analyst :
                 false;
         } catch (\Exception $e) {
             logError('添加用户失败!', [$e->getMessage()]);
@@ -64,10 +57,10 @@ class Admin extends Authenticatable implements JWTSubject
      */
     public static function checknumber($request)
     {
-        $admin = $request['admin'];
+        $analyst = $request['analyst'];
         try{
-            $count =self::select('admin')
-                ->where('admin',$admin)
+            $count =self::select('analyst')
+                ->where('analyst',$analyst)
                 ->count();
             //echo "该账号存在个数：".$count;
             //echo "\n";
@@ -78,3 +71,5 @@ class Admin extends Authenticatable implements JWTSubject
         }
     }
 }
+
+

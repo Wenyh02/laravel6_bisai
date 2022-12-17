@@ -63,4 +63,25 @@ Route::prefix('/analysis')->group(function () {
     Route::get('/item/export', 'WjhAnalysisController@wjh_export_item');  // 导出某项目个人单项奖获奖信息
     Route::post('/omnipotence', 'WjhAnalysisController@wjh_get_omnipotence');  // 查询个人全能奖获奖信息
     Route::get('/omnipotence/export', 'WjhAnalysisController@wjh_export_omnipotence');  // 查询个人全能奖获奖信息
+    Route::post('login','Wyh_AnalysisController@login');//记分员登录
+    Route::post('organization','Wyh_AnalysisController@wyh_organization');//优秀组织奖
+    Route::get('organization/export','Wyh_AnalysisController@wyh_organizationexpor');//优秀组织奖的excel导出
+    Route::post('group','Wyh_AnalysisController@wyh_group');//优秀团体奖
+    Route::get('group/export','Wyh_AnalysisController@wyh_groupexport');//优秀团体奖excel导出
+
+});
+Route::prefix('admin')->group(function (){
+    Route::post('registered','AdminController@registered');//注册
+    Route::post('login','AdminController@login');//管理员登录
+    Route::post('users/import','AdminController@wyh_Upload');//参赛人员信息的导入
+    Route::post('users/select','AdminController@wyh_Select');//查询参赛人员信息
+    Route::post('users/mod_stu','AdminController@wyh_fixstu');//修改学生的参赛信息
+    Route::post('users/mod_teacher','AdminController@wyh_fixtea');//修改老师的参赛信息
+    Route::post('users/del_stu','AdminController@wyh_deletstu');//删除学生信息
+    Route::post('users/del_teacher','AdminController@wyh_delettea');//删除老师信息
+
+});
+//记分员端
+Route::prefix('scorer')->group(function (){
+    Route::post('login','Wyh_ScorerController@login');//管理员登录
 });

@@ -40,10 +40,19 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
-
         'api' => [
             'driver' => 'jwt',
             'provider' => 'admin',
+        ],
+        'analyst' => [
+            'driver' => 'jwt',
+            'provider' => 'analyst',
+
+        ],
+        'scorer' => [
+            'driver' => 'jwt',
+            'provider' => 'scorer',
+
         ],
     ],
 
@@ -68,6 +77,14 @@ return [
         'admin' => [
             'driver' => 'eloquent',
             'model' => App\Models\Admin::class,
+        ],
+        'analyst' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Wyh_Analysis::class,
+        ],
+        'scorer' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Wyh_Scorer::class,
         ],
 
         // 'users' => [
