@@ -83,5 +83,26 @@ Route::prefix('admin')->group(function (){
 });
 //记分员端
 Route::prefix('scorer')->group(function (){
+    Route::prefix('/manage')->group(function (){
+        Route::post('/get_pros','YmController\ScorerController@GetPro');//获取比赛项目列表
+        Route::post('/select','YmController\ScorerController@Select_Pro');//项目条件查询
+        Route::post('/record','YmController\ScorerController@Record');//录入分数
+    });
     Route::post('login','Wyh_ScorerController@login');//管理员登录
+    Route::post('mod_pw','YmController\ScorerController@Mod_PW');//修改记分员的密码
 });
+
+
+/**
+ * 成绩分析端成绩详情查看
+ */
+
+Route::prefix('/analysis')->group(function (){
+    Route::prefix('/detail')->group(function (){
+        Route::post('get_pros','YmController\AnaController@Get_Pros');//获取分组下的项目信息
+        Route::post('select','YmController\AnaController@Select_grade');//查询某个项目参赛人员的成绩
+        Route::post('average','YmController\AnaController@Average');//获取项目平均分
+        Route::get('export','YmController\AnaController@Export');//导出某个项目参赛人员成绩Excel
+    });
+});
+
