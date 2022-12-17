@@ -16,6 +16,25 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+/**
+ * 成绩分析端/获奖评比查看
+ * @author WJH
+ */
+Route::prefix('analysis')->group(function () {
+    Route::post('guide','LX_AnalysisController@LX_get_guidance');//优秀指导教师奖
+    Route::get('guide/export','LX_AnalysisController@LX_get_export');//导出优秀指导教师名单
+});
+
+/**
+ * 管理员端：项目管理
+ */
+Route::prefix('/admin/project')->group(function (){
+    Route::get('select','Lx_ProjectController@LX_Select_pro');//查询项目信息
+    Route::get('get_scorers','Lx_ProjectController@LX_Select_scorer');//获取记分员列表
+    Route::post('modify','Lx_ProjectController@LX_Update_modify');//修改项目信息
+    Route::post('delete','Lx_ProjectController@LX_delete_pro');//删除项目信息
+    Route::post('select_by_name','Lx_ProjectController@LX_Select_pro_by_name');//通过项目名称查找比赛项目
+});
 Route::prefix('admin')->group(function (){
     Route::post('registered','AdminController@registered');
     Route::post('login','AdminController@login');
